@@ -1,15 +1,15 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Divider from "@material-ui/core/Divider";
-import { makeStyles } from '@material-ui/core/styles';
+//import Divider from "@material-ui/core/Divider";
+//import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
+//import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+//import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 class Form extends React.Component{
@@ -49,7 +49,7 @@ class Todo extends React.Component {
           <TableRow>
             <TableCell align="center">ToDo</TableCell>
             <TableCell align="center">priority</TableCell>
-            <TableCell align="center">statu</TableCell>
+            <TableCell align="center">status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -115,10 +115,10 @@ class App extends React.Component{
 
     const todos = [
       {
-        id: 0,
-        todo: 'test',
-        priority: '9',
-        done: true
+        id: 1,
+        todo: 'webアプリ作成',
+        priority: '10',
+        done: false
       }
     ]
 
@@ -152,6 +152,17 @@ class App extends React.Component{
 
     e.target.todo.value = '';
     e.target.priority.value = '';
+  }
+
+  resetSubmit(e){
+    e.preventDefault()
+    this.setState({nowTargetValue: 0})
+  }
+
+  setTargetValue(e){
+    e.preventDefault()
+    //console.log(e.target.value)
+    this.setState({targetValue: e.target.newTargetValue.value});
   }
 
   deleteTodo(clickTodo){
@@ -202,10 +213,37 @@ class App extends React.Component{
               あなたの目標値は{this.state.targetValue}です。<br />
             </div>
           </Grid>
+        </Grid>
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+          <form onSubmit={e => this.setTargetValue(e)}>
+          <Grid container spacing={3}>
+            <Grid item xs={6}>
+              <div align="right">
+                <TextField label="目標値を入力" input name="newTargetValue" type="number" />
+              </div>
+            </Grid>
+            <Grid item xs={6}>
+              <div align="left">
+                <Button variant="contained" color="primary" type="submit">変更</Button>
+              </div>
+            </Grid>
+            </Grid>
+          </form>
+          </Grid>
+        </Grid>
+        <Grid container spacing={3}>
           <Grid item xs={12}>
             <div align="center">
               現在の達成値は{this.state.nowTargetValue}です。<br />
             </div>
+          </Grid>
+          <Grid item xs={12}>
+            <form onSubmit={e => this.resetSubmit(e)}>
+            <div align="center">
+              <Button variant="contained" color="primary" type="submit">リセット</Button>
+            </div>
+            </form>
           </Grid>
         </Grid>
         <Form handleSubmit={this.handleSubmit.bind(this)} />
