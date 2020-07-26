@@ -1,13 +1,42 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Divider from "@material-ui/core/Divider";
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 class Form extends React.Component{
     render(){
       return(
         <div className="form">
           <form onSubmit={this.props.handleSubmit}>
-            <input name="todo" type="text" /><br/>
-            <input name="priority" type="number" min="1" max="10" />
-            <button type="submit">確定</button>
+            <Grid container spacing={3}>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={3}>
+                <div align="right">
+                  <TextField label="ToDo" input name="todo" type="text" />
+                </div>
+              </Grid>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={3}></Grid>
+              <Grid item xs={3}>
+                <div align="right">
+                  <TextField label="priority" input name="priority" type="number" min="1" max="10" />
+                </div>
+              </Grid>
+              <Grid item xs={3}>
+                <Button variant="contained" color="primary" type="submit">確定</Button>
+              </Grid>
+              <Grid item xs={3}></Grid>
+            </Grid>
           </form>
         </div>
       )
@@ -19,11 +48,22 @@ class Todo extends React.Component {
     const className ='undone'
     const link = this.props.done ? '削除' : '完了！'
     return(
-      <li className={className}>
-        <span>{this.props.todo} </span>
-        <span>重要度: {this.props.priority} </span>
-        <a href="" onClick={(e) => {e.preventDefault(); this.props.done ? this.props.deleteTodo(this.props) : this.props.setTodoStatus(this.props)}}>{link}</a>
-      </li>
+      <Table className={className}>
+        <TableHead>
+          <TableRow>
+            <TableCell align="center">ToDo</TableCell>
+            <TableCell align="center">priority</TableCell>
+            <TableCell align="center">statu</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell align="center">{this.props.todo} </TableCell>
+            <TableCell align="center">{this.props.priority} </TableCell>
+            <TableCell align="center"><a href="" onClick={(e) => {e.preventDefault(); this.props.done ? this.props.deleteTodo(this.props) : this.props.setTodoStatus(this.props)}}>{link}</a></TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     );
   }
 }
@@ -154,9 +194,24 @@ class App extends React.Component{
   {
     return (
       <div className="app">
-        <h1>To Do List</h1>
-        あなたの目標値は{this.state.targetValue}です。<br />
-        現在の達成地は{this.state.nowTargetValue}です。<br />
+        <Grid container spacing={3}>
+          
+          <Grid item xs={12}>
+            <div align="center">
+              <h1>To Do List</h1>
+            </div>
+          </Grid>
+          <Grid item xs={12}>
+            <div align="center">
+              あなたの目標値は{this.state.targetValue}です。<br />
+            </div>
+          </Grid>
+          <Grid item xs={12}>
+            <div align="center">
+              現在の達成値は{this.state.nowTargetValue}です。<br />
+            </div>
+          </Grid>
+        </Grid>
         <Form handleSubmit={this.handleSubmit.bind(this)} />
 
         <TodoList
