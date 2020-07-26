@@ -18,24 +18,20 @@ class Form extends React.Component{
         <div className="form">
           <form onSubmit={this.props.handleSubmit}>
             <Grid container spacing={3}>
-              <Grid item xs={3}></Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
                 <div align="right">
                   <TextField label="ToDo" input name="todo" type="text" />
                 </div>
               </Grid>
-              <Grid item xs={3}></Grid>
-              <Grid item xs={3}></Grid>
-              <Grid item xs={3}></Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}></Grid>
+              <Grid item xs={6}>
                 <div align="right">
                   <TextField label="priority" input name="priority" type="number" min="1" max="10" />
                 </div>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={6}>
                 <Button variant="contained" color="primary" type="submit">確定</Button>
               </Grid>
-              <Grid item xs={3}></Grid>
             </Grid>
           </form>
         </div>
