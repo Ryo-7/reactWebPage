@@ -6,7 +6,7 @@ class Form extends React.Component{
         <div className="form">
           <form onSubmit={this.props.handleSubmit}>
             <input name="todo" type="text" /><br/>
-            <input name="priority" type="text" />
+            <input name="priority" type="number" min="1" max="10" />
             <button type="submit">確定</button>
           </form>
         </div>
