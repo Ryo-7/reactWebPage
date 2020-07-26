@@ -9,8 +9,9 @@ import TableCell from '@material-ui/core/TableCell';
 //import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-//import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+//import Paper from '@material-ui/core/Paper';
 
 class Form extends React.Component{
     render(){
@@ -44,28 +45,26 @@ class Todo extends React.Component {
     const className ='undone'
     const link = this.props.done ? '削除' : '完了！'
     return(
-      <Table className={className}>
-        <TableHead>
-          <TableRow>
-            <TableCell align="center">ToDo</TableCell>
-            <TableCell align="center">priority</TableCell>
-            <TableCell align="center">status</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow>
-            <TableCell align="center">{this.props.todo} </TableCell>
-            <TableCell align="center">{this.props.priority} </TableCell>
-            <TableCell align="center"><a href="" onClick={(e) => {e.preventDefault(); this.props.done ? this.props.deleteTodo(this.props) : this.props.setTodoStatus(this.props)}}>{link}</a></TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
+      <Grid container spacing={3}>
+        <Grid item xs={4}>
+          <div align="center">
+            {this.props.todo} 
+          </div>
+        </Grid>
+        <Grid item xs={4}>
+          <div align="center">{this.props.priority} </div>
+        </Grid>
+        <Grid item xs={4}>
+          <div align="center"><a href="" onClick={(e) => {e.preventDefault(); this.props.done ? this.props.deleteTodo(this.props) : this.props.setTodoStatus(this.props)}}>{link}</a></div>
+        </Grid>
+      </Grid>
     );
   }
 }
 
 class TodoList extends React.Component {
   render(){
+
     const todos = this.props.todos.map( todo =>
       <Todo
         key={todo.id}
@@ -76,6 +75,7 @@ class TodoList extends React.Component {
     )
 
     return(
+
       <ul>
         {todos}
       </ul>
@@ -247,6 +247,24 @@ class App extends React.Component{
           </Grid>
         </Grid>
         <Form handleSubmit={this.handleSubmit.bind(this)} />
+
+        <Grid container spacing={3}>
+        <Grid item xs={4}>
+        <div align="center">
+          Todo
+        </div>
+        </Grid>
+        <Grid item xs={4}>
+          <div align="center">
+            priority
+          </div>
+        </Grid>
+        <Grid item xs={4}>
+          <div align="center">
+            status
+          </div>
+        </Grid>
+      </Grid>
 
         <TodoList
         todos={this.state.todos}
